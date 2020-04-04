@@ -1,48 +1,60 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-// import Api from '../../utils/request'
-// import Tips from '../../utils/tips'
+import { AtTabBar } from 'taro-ui'
 import { IndexProps, IndexState } from './index.interface'
 import './index.scss'
-// import {  } from '../../components'
+import Home from '../home/home'
+import Message from '../message/message'
+import User from '../user/user'
 
 @connect(({ index }) => ({
   ...index,
 }))
 class Index extends Component<IndexProps, IndexState> {
-  config: Config = {
-    navigationBarTitleText: 'Taro + dva demo'
-  }
-  constructor(props: IndexProps) {
-    super(props)
-    this.state = {
 
+  constructor() {
+    super(...arguments)
+    this.state = {
+      current: 0
     }
   }
 
-  componentDidMount() {
-    // 加载完成执行一个 action 异步
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'index/getLists',
-      payload: {
-        title: '加载完成咯'
-      }
+  handleClick(value) {
+    this.setState({
+      current: value
     })
   }
 
+  config: Config = {
+    navigationBarTitleText: '积木'
+  }
+
+  componentDidMount() {}
+
   render() {
-    const { data, title } = this.props;
+    const { current } = this.state;
     return (
-      <View className='fx-index-wrap'>
-        <View className='index-list'>
-          你好
-        </View>
-        <View>{data}</View>
-        <View>
-          {title}
-        </View>
+      <View>
+        {
+          current === 0 && <Home />
+        }
+        {
+          current === 1 && <Message />
+        }
+        {
+          current === 2 && <User />
+        }
+        <AtTabBar
+          fixed
+          tabList={[
+            { title: '主页', iconType: 'bullet-list' },
+            { title: '消息', iconType: 'message', text: 'new' },
+            { title: '用户', iconType: 'user', text: '100' }
+          ]}
+          onClick={this.handleClick.bind(this)}
+          current={this.state.current}
+        />
       </View>
     )
   }

@@ -5,7 +5,7 @@
  * @interface IndexState
  */
 export interface IndexState {
-  
+  current: number
 }
 
 /**
