@@ -73,6 +73,9 @@ const config = {
           generateScopedName: '[name]__[local]___[hash:base64:5]'
         }
       }
+    },
+    h5: {
+      esnextModules: ['taro-ui']
     }
   }
 }
