@@ -10,14 +10,11 @@ import { useSelector, useDispatch } from '@tarojs/redux'
 
 const Index = (props: IndexProps) => {
   const [current, setCurrent] = useState(0);
-  const [loading, setloading] = useState(false);
-  
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch({ type: 'index/getLists', title: 'aaaaaa' })
-  }, [loading]);
+  }, []);
   const d = useSelector(state => state) // 获取redux数据
-  console.log(d)
   return (
     <View>
       {
