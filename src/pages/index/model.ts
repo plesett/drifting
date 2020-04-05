@@ -9,14 +9,14 @@ export default {
   },
 
   effects: {
-    * getLists({ payload }, { select, call, put }) {
+    * getLists({ title }, { select, call, put }) {
       // const { title } = yield select(state => state.index) // 获取state里面的值
       const res = yield call(indexApi.getLists)
         yield put({
           type: 'updateState',
           payload: {
             data: res.msg,
-            title: payload.title
+            title: title
           }
         })
     }

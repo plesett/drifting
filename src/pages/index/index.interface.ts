@@ -15,9 +15,7 @@ export interface IndexState {
  * @interface IndexProps
  */
 export interface IndexProps {
-  dispatch?: any,
-  data: string
-  title: string
+
 }
 
 export interface DataInterface {
