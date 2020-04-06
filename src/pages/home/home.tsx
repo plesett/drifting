@@ -19,10 +19,11 @@ const data = [
 ]
 
 const Home = (props: HomeProps) => {
-  const [isCatch, setCatch] = useState(false);
-  const [isThrow, setThrow] = useState(false);
+  const [isCatch, setCatch] = useState<boolean>(false);
+  const [isThrow, setThrow] = useState<boolean>(false);
   const handleOnclick = ({ }, index) => {
     if (index === 0) {
+      if (isThrow) setThrow(false);
       setCatch(true)
       let NetworkTimeout = setTimeout(() => {
         Taro.atMessage({

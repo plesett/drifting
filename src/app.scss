@@ -8,3 +8,13 @@
 @import "~taro-ui/dist/style/components/message.scss";
 @import "~taro-ui/dist/style/components/textarea.scss";
 @import "~taro-ui/dist/style/components/button.scss";
+@import "~taro-ui/dist/style/components/segmented-control.scss";
+@import "~taro-ui/dist/style/components/list.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/tabs.scss";
+@import "~taro-ui/dist/style/components/badge.scss";
+
+.at-list__item-thumb{
+    width: 70px !important;
+    height: 70px !important;
+}
