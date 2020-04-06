@@ -1,19 +1,66 @@
-
-import Taro from '@tarojs/taro'
+import Taro, { useState } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { HomeProps } from './home.interface'
 import './home.scss'
+import { Loading } from '../../components/Loading'
+import { AlertMessage } from '../../components/AlertMessage'
+import { AtGrid, AtMessage } from "taro-ui"
 
-const Home = (props:HomeProps) => {
+
+const data = [
+  {
+    image: require('../../assets/get.png'),
+    value: '捞瓶子'
+  },
+  {
+    image: require('../../assets/out.png'),
+    value: '扔瓶子'
+  }
+]
+
+const Home = (props: HomeProps) => {
+  const [isCatch, setCatch] = useState(false);
+  const [isThrow, setThrow] = useState(false);
+  const handleOnclick = ({ }, index) => {
+    if (index === 0) {
+      setCatch(true)
+      let NetworkTimeout = setTimeout(() => {
+        Taro.atMessage({
+          'message': '网络超时',
+          'type': 'warning',
+        })
+        setCatch(false)
+        // 销毁定时器
+        clearTimeout(NetworkTimeout)
+      }, 25000);
+    } else {
+      setThrow(true)
+    }
+  }
   return (
     <View className='home-body'>
-      {/* <View className='home-h'></View> */}
+      <Loading
+        status={isCatch}
+        text='捕捞中'
+      />
+      <View className='home-buttom'>
+        <AtGrid
+          mode='rect'
+          hasBorder={false}
+          columnNum={2}
+          data={data}
+          onClick={handleOnclick}
+        />
+        <AtMessage />
+      </View>
+      {
+        isThrow &&
+        <AlertMessage
+          setThrowFunc={setThrow}
+        />
+      }
     </View>
   )
 }
 
-Home.config = {
-  navigationBarTitleText: '标题'
-}
-
-export default Home
+export default Home;
