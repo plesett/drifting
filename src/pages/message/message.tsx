@@ -10,8 +10,8 @@ const Message = (props: MessageProps) => {
   const tabList = [{ title: '消息' }, { title: '好友' }, { title: '通知' }]
   const handleOcClick = () => {
     // 跳转到目的页面，在当前页面打开
-    Taro.redirectTo({
-      url: 'pages/dialogue/dialogue'
+    Taro.navigateTo({
+      url: '/pages/dialogue/dialogue'
     })
   }
   return (

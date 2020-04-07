@@ -11,9 +11,9 @@ import { useSelector, useDispatch } from '@tarojs/redux'
 
 const Index = (props: IndexProps) => {
   const [current, setCurrent] = useState(0);
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   useEffect(() => {
-    // dispatch({ type: 'index/getLists', title: 'aaaaaa' })
+    dispatch({ type: 'index/getLists', title: 'aaaaaa' })
   }, []);
   // const d = useSelector(state => state) // 获取redux数据
   return (
