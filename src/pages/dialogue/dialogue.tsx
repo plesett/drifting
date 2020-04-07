@@ -31,11 +31,11 @@ class Dialogue extends Component<DialogueProps,DialogueState > {
       <View className='dialogue-wrap'>
         <DialogueText
           text='这里是测试文字'
-          image='http://47.101.206.144:7001/public/default_yg.png'
+          image='https://dss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3256100974,305075936&fm=26&gp=0.jpg'
         />
         <DialogueText
           text='这里是测试文字这里是测试文字这里是测试文字这里是测试文字这里是测试文字这里是测试文字这里是测试文字'
-          image='http://47.101.206.144:7001/public/default_yg.png'
+          image='https://dss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3256100974,305075936&fm=26&gp=0.jpg'
         />
         <DialogueText
           isMe
