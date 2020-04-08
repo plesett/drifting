@@ -8,13 +8,16 @@ import { useSelector, useDispatch } from '@tarojs/redux'
 
 const Message = (props: MessageProps) => {
   const tabList = [{ title: '消息' }, { title: '好友' }, { title: '通知' }]
-  const dispatch = useDispatch()
   const [current, setCurrent] = useState(0);
   const [IsLongPress, setIsLongPress] = useState<number | null>(null);
+
+  const dispatch = useDispatch()
   const { message }: any = useSelector(state => state)
   const { isLongPress }: { isLongPress: { id: number; state: boolean } } = message;
 
   useEffect(() => {
+    // 初始化构建 redux isLongPress
+    // ...
     if (IsLongPress === null) return;
     console.log(1)
     let OffSwipeAction = setTimeout(() => {
@@ -49,9 +52,7 @@ const Message = (props: MessageProps) => {
               <AtSwipeAction
                 isOpened={isLongPress[0].state}
                 disabled={isLongPress[0].state}
-                // onClick={() => console.log('点击')}
-                onOpened={() => console.log('确定')}
-                onClosed={() => console.log('关闭')}
+                onClick={() => console.log('删除')}
                 options={[
                   {
                     text: '删除',
