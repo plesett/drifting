@@ -5,10 +5,27 @@ import * as messageApi from './service';
 export default {
   namespace: 'message',
   state: {
+    isLongPress: [
+      {
+        id: 0,
+        state: false
+      }
+    ]
   },
 
-  effects: {},
+  effects: {
+    *GetUpdateIsLongPress({ data }, { call, put }) {
+      yield put({
+        type: 'UpdateIsLongPress',
+        data: data
+      })
+    }
+  },
 
-  reducers: {}
+  reducers: {
+    UpdateIsLongPress(state, {  data }) {
+      return { ...state, ...data }
+    }
+  }
 
 }

@@ -13,4 +13,8 @@ export interface UserState {}
  * @export
  * @interface UserProps
  */
-export interface UserProps {}
+export interface UserProps {
+    user?: {
+        uid: number
+    }
+}
