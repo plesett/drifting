@@ -7,15 +7,63 @@ import Home from '../home/home'
 import Message from '../message/message'
 import User from '../user/user'
 import { useSelector, useDispatch } from '@tarojs/redux'
-// process.env.TARO_ENV === 'weapp'
+import { AlertAuthorization } from '../../components/AlertAuthorization'
 
 const Index = (props: IndexProps) => {
   const [current, setCurrent] = useState(0);
   const dispatch = useDispatch()
+  const index = useSelector<{index}, { index }>(state => state) // 获取redux数据
+  const { Authorization } = index.index;
   useEffect(() => {
-    dispatch({ type: 'index/getLists', title: 'aaaaaa' })
-  }, []);
-  // const d = useSelector(state => state) // 获取redux数据
+    Taro.getSetting({
+      success: (res) => {
+        if (res.authSetting['scope.userInfo']) {
+          // 已授权
+          console.log('已授权')
+          dispatch({
+            type: 'index/UpdateAuthorization',
+            Authorization: false
+          })
+        } else {
+          // 未授权
+          console.log('未授权')
+          dispatch({
+            type: 'index/UpdateAuthorization',
+            Authorization: true
+          })
+        }
+      }
+    })
+    Taro.getStorage({
+      key: 'UserInfo',
+      success: (res) => {
+        if (res.data.cloudID) {
+          // 本地有用户信息
+          dispatch({
+            type: 'index/UpdateisUserInfo',
+            data: res.data
+          })
+        } else {
+          // 本地没用户数据
+          console.log('本地没用户数据')
+          dispatch({
+            type: 'index/UpdateAuthorization',
+            Authorization: true
+          })
+        }
+      }
+    })
+  }, [current]);
+  const UserInfo = (res) => {
+    Taro.setStorage({
+      key: "UserInfo",
+      data: res.detail
+    })
+    dispatch({
+      type: 'index/UpdateAuthorization',
+      Authorization: false
+    })
+  }
   return (
     <View>
       {
@@ -26,6 +74,14 @@ const Index = (props: IndexProps) => {
       }
       {
         current === 2 && <User />
+      }
+      {
+        Authorization &&
+        <AlertAuthorization
+          title='授权'
+          onGetUserInfo={UserInfo}
+          Image='http://storage.360buyimg.com/mtd/home/32443566_635798770100444_2113947400891531264_n1533825816008.jpg'
+        />
       }
       <AtTabBar
         fixed

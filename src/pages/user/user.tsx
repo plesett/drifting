@@ -1,33 +1,38 @@
-import Taro from '@tarojs/taro'
-import { View, Image } from '@tarojs/components'
+import Taro, { useState, useEffect } from '@tarojs/taro'
+import { View, Image, Button } from '@tarojs/components'
 import { UserProps } from './user.interface'
 import { AtAvatar, AtList, AtListItem } from 'taro-ui'
 import './user.scss'
-
+import { useSelector } from '@tarojs/redux'
 
 const User = (props: UserProps) => {
-  const { user = {} } = props;
+  const index = useSelector<{ index }, { index }>(state => state) // 获取redux数据
+  const { Authorization } = index.index;
+  const { userInfo } = index.index.UserInfo;
+  const { nickName, avatarUrl } = userInfo;
   return (
     <View className='user-wrap'>
       <View className='at-row user-Info'>
         <View className='at-col at-col-2'>
           <AtAvatar
-            image={Object.keys(user).length > 0 ? 'http://pic2.zhimg.com/50/v2-fb824dbb6578831f7b5d92accdae753a_hd.jpg' : 'http://47.101.206.144:7001/public/default_yg.png'}
+            image={!Authorization ? avatarUrl : 'http://47.101.206.144:7001/public/default_yg.png'}
             circle
             size='large'
           />
         </View>
         <View className='at-col at-col-10'>
           {
-            Object.keys(user).length > 0 ?
-              <View className='user-name'>酸梨<View className='user-mobile'>182****1057</View></View>
+            !Authorization ?
+              <View className='user-name'>{nickName}<View className='user-mobile'>182****1057</View></View>
               :
-              <View className='user-name'>未登录<View className='user-mobile'>点击登录</View></View>
+              <View
+                className='user-name'
+              >未登录<View className='user-mobile'>点击登录</View></View>
           }
         </View>
       </View>
+      
       <View>
-
         <View className='at-row at-row__justify--between user-Menu-list'>
           <Image
             className='user-Menu-Img'

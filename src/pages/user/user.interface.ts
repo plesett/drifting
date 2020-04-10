@@ -15,6 +15,8 @@ export interface UserState {}
  */
 export interface UserProps {
     user?: {
-        uid: number
+        userInfo: {
+            
+        }
     }
 }

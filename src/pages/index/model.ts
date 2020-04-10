@@ -4,27 +4,33 @@ import * as indexApi from './service';
 export default {
   namespace: 'index',
   state: {
-    data: '暂未请求到数据',
-    title: '暂未修改'
+    Authorization: true,
+    UserInfo: {}
   },
 
   effects: {
-    * getLists({ title }, { select, call, put }) {
+    * UpdateisUserInfo({ data }, { select, call, put }) {
       // const { title } = yield select(state => state.index) // 获取state里面的值
-      const res = yield call(indexApi.getLists)
+      // const res = yield call(indexApi.getLists)
         yield put({
-          type: 'updateState',
-          payload: {
-            data: res.msg,
-            title: title
-          }
+          type: 'UpdateUserInfoState',
+          data: data
         })
+    },
+    * UpdateAuthorization({ Authorization }, { select, call, put }) {
+      yield put({
+        type: 'UpdateAuthorizationState',
+        Authorization: Authorization
+      })
     }
   },
 
   reducers: {
-    updateState(state, { payload: data }) {
-      return { ...state, ...data }
+    UpdateUserInfoState(state, { data: data }) {
+      return { ...state, UserInfo: data, Authorization: false }
+    },
+    UpdateAuthorizationState(state, { Authorization }) {
+      return { ...state, Authorization: Authorization }
     }
   }
 }

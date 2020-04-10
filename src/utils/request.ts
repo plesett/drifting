@@ -14,7 +14,7 @@ import { createLogger } from './logger';
 
 declare type Methods = "GET" | "OPTIONS" | "HEAD" | "POST" | "PUT" | "DELETE" | "TRACE" | "CONNECT";
 declare type Headers = { [key: string]: string };
-declare type Datas = { method: Methods;[key: string]: any;  };
+declare type Datas = { method: Methods;[key: string]: any; };
 interface Options {
 	url: string;
 	host?: string;
@@ -113,10 +113,11 @@ export class Request {
 
 			// 请求登录
 			const { data } = await Taro.request({
+				method: 'POST',
 				url: `${MAINHOST}${requestConfig.loginUrl}`,
 				data: { code: code }
 			})
-
+			
 			if (data.code !== 0 || !data.data || !data.data.token) {
 				reject()
 				return

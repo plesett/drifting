@@ -1,4 +1,4 @@
-import Taro, { useState } from '@tarojs/taro'
+import Taro, { useState, useEffect } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { HomeProps } from './home.interface'
 import './home.scss'
@@ -60,6 +60,7 @@ const Home = (props: HomeProps) => {
           setThrowFunc={setThrow}
         />
       }
+
     </View>
   )
 }

@@ -8,7 +8,7 @@ export const ONLINEHOST = 'http://47.101.206.144:7001'
 /** 
  * 测试环境
  */
-export const QAHOST = 'http://xxx.cn'
+export const QAHOST = 'http://localhost:3000'
 
 /** 
  * 线上mock
@@ -23,7 +23,7 @@ export const ISMOCK = false
 /**
  * 当前的host  ONLINEHOST | QAHOST | MOCKHOST
  */
-export const MAINHOST = ONLINEHOST
+export const MAINHOST = QAHOST
 
 /**
  * 全局的分享信息 不用每一个都去写

@@ -1,8 +1,7 @@
-
 import Taro, { useState, useEffect } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { MessageProps } from './message.interface'
-import { AtTabs, AtTabsPane, AtList, AtListItem, AtBadge, AtSwipeAction } from 'taro-ui'
+import { AtTabs, AtTabsPane, AtList, AtListItem, AtSwipeAction } from 'taro-ui'
 import './message.scss'
 import { useSelector, useDispatch } from '@tarojs/redux'
 
@@ -19,7 +18,6 @@ const Message = (props: MessageProps) => {
     // 初始化构建 redux isLongPress
     // ...
     if (IsLongPress === null) return;
-    console.log(1)
     let OffSwipeAction = setTimeout(() => {
       handleLongPress({})
       setIsLongPress(null)
@@ -45,8 +43,16 @@ const Message = (props: MessageProps) => {
   }
   return (
     <View className='message-wrap'>
-      <AtTabs animated={false} current={current} tabList={tabList} onClick={(e: number) => setCurrent(e)}>
-        <AtTabsPane current={current} index={0} >
+      <AtTabs
+        animated={false}
+        current={current}
+        tabList={tabList}
+        onClick={(e: number) => setCurrent(e)}
+      >
+        <AtTabsPane
+          current={current}
+          index={0}
+        >
           <View>
             <AtList>
               <AtSwipeAction
