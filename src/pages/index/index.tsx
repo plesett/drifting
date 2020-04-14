@@ -55,6 +55,8 @@ const Index = (props: IndexProps) => {
     })
   }, [current]);
   const UserInfo = (res) => {
+    // 当用户拒绝授权处理
+    console.log(res)
     Taro.setStorage({
       key: "UserInfo",
       data: res.detail

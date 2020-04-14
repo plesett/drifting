@@ -9,6 +9,7 @@ const User = (props: UserProps) => {
   const index = useSelector<{ index }, { index }>(state => state) // 获取redux数据
   const { Authorization } = index.index;
   const { userInfo } = index.index.UserInfo;
+  if (userInfo === undefined) return;
   const { nickName, avatarUrl } = userInfo;
   return (
     <View className='user-wrap'>
