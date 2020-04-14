@@ -56,7 +56,7 @@ const Index = (props: IndexProps) => {
   }, [current]);
   const UserInfo = (res) => {
     // 当用户拒绝授权处理
-    console.log(res)
+    if(res.detail.errMsg === 'getUserInfo:fail auth deny') return;
     Taro.setStorage({
       key: "UserInfo",
       data: res.detail

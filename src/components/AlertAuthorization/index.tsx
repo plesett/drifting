@@ -7,10 +7,6 @@ export const AlertAuthorization = (props: { title?: string; Image: string; text?
 	const { title = '授权', Image, text = '信息', onGetUserInfo } = props;
 	const dispatch = useDispatch()
 	const handleOut = () => {
-		dispatch({
-			type: 'index/UpdateAuthorization',
-			Authorization: false
-		})
 		Taro.showModal({
 			title: '警告',
 			content: '点击退出小程序',
@@ -19,7 +15,7 @@ export const AlertAuthorization = (props: { title?: string; Image: string; text?
 		})
 	}
 	return (
-		<AtModal isOpened>
+		<AtModal closeOnClickOverlay={false} isOpened>
 			<AtModalHeader>{title}</AtModalHeader>
 			<AtModalContent>
 				<View style='display: flex;justify-content: center;margin-bottom: 3%'>
